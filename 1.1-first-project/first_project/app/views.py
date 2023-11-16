@@ -2,7 +2,6 @@ import os
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, reverse
 from datetime import datetime
-# from django.urls import reverse
 
 
 def home_view(request):

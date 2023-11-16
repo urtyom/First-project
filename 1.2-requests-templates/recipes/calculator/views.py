@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+
 DATA = {
     'omlet': {
         'яйца, шт': 2,
@@ -19,12 +20,30 @@ DATA = {
     # можете добавить свои рецепты ;)
 }
 
-# Напишите ваш обработчик. Используйте DATA как источник данных
-# Результат - render(request, 'calculator/index.html', context)
-# В качестве контекста должен быть передан словарь с рецептом:
-# context = {
-#   'recipe': {
-#     'ингредиент1': количество1,
-#     'ингредиент2': количество2,
-#   }
-# }
+def calculate_recipe(request):
+    # Получить название рецепта из запроса, например: /recipe?name=omlet
+    recipe_name = request.GET.get('name', None)
+    
+    # Получить количество порций из опционального параметра servings
+    servings = int(request.GET.get('servings', 1))
+    
+    if recipe_name is None or recipe_name not in DATA:
+        # Если название рецепта не указано или не найдено в данных
+        context = {
+            'recipe': None
+        }
+    else:
+        # Иначе, получить рецепт из данных
+        recipe = DATA[recipe_name]
+        
+        # Создать новый словарь с учетом количества порций
+        adjusted_recipe = {}
+        for ingredient, quantity in recipe.items():
+            adjusted_quantity = quantity * servings
+            adjusted_recipe[ingredient] = adjusted_quantity
+        
+        context = {
+            'recipe': adjusted_recipe
+        }
+    
+    return render(request, 'calculator/index.html', context)
