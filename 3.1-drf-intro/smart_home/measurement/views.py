@@ -16,14 +16,16 @@ class SensorList(ListCreateAPIView):
 
 
 class SensorUpdate(RetrieveUpdateAPIView):
-    # def get_serializer_class(self):
-    #     if self.request.content_type == '' and 'id' in self.request.GET:
-    #         return SensorDetailSerializer
-    #     else:
-    #         return SensorSerializer
-
     queryset = Sensor.objects.all()
-    serializer_class = SensorSerializer
+
+    def get_serializer_class(self):
+        if self.request.content_type == '' and 'id' in self.request.GET:
+            return SensorDetailSerializer
+        else:
+            return SensorSerializer
+
+
+    # serializer_class = SensorSerializer
 
 
 class MeasurementCreateView(CreateAPIView):
