@@ -4,7 +4,10 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, Cr
 
 
 from .models import Measurement, Sensor
-from .serializers import SensorSerializer, MeasurementSerializer
+from .serializers import SensorSerializer, SensorDetailSerializer
+
+
+from .serializers import MeasurementAddSerializer
 
 
 class SensorList(ListCreateAPIView):
@@ -13,29 +16,16 @@ class SensorList(ListCreateAPIView):
 
 
 class SensorUpdate(RetrieveUpdateAPIView):
+    # def get_serializer_class(self):
+    #     if self.request.content_type == '' and 'id' in self.request.GET:
+    #         return SensorDetailSerializer
+    #     else:
+    #         return SensorSerializer
+
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
 
 
 class MeasurementCreateView(CreateAPIView):
     queryset = Measurement.objects.all()
-    serializer_class = MeasurementSerializer
-
-    # def create(self, request, *args, **kwargs):
-    #     serializer = self.get_serializer(data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-    #     measurement = Measurement.objects.create(
-    #         sensor=serializer.validated_data['sensor'],
-    #         temperature=serializer.validated_data['temperature'],
-    #         date_time=timezone.now()
-    #     )
-    #     return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    # from django.utils import timezone
-    #
-    # measurement = Measurement(
-    #     sensor=1,
-    #     temperature=22.3,
-    #     date_time=timezone.now()
-    # )
-    # measurement.save()
+    serializer_class = MeasurementAddSerializer
