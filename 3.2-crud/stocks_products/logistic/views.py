@@ -14,7 +14,7 @@ class ProductViewSet(ModelViewSet):
     # при необходимости добавьте параметры фильтрации
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     # filterset_fields = ['title']
-    search_fields = ['title']
+    search_fields = ['title', 'description']
     # ordering_field = ['title']
     pagination_class = LimitOffsetPagination
 
