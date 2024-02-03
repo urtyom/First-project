@@ -60,5 +60,5 @@ jobs:
           DB_HOST: ${{ env.HOST }}
           DB_PORT: ${{ env.PORT }}
 
-      - name: деплой
-        uses:
+#      - name: деплой
+#        uses:
