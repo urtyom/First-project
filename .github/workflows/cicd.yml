@@ -48,7 +48,7 @@ jobs:
 #        run: flake8 logistic/ --exclude=3.2-crud/stocks_products/logistic/migrations/
 
       - name: тестирование
-        run: python manage.py test
+        run: python 3.2-crud/stocks_products/manage.py test
         env:
           ALLOWED_HOSTS: ${{ env.ALLOWED }}
           DEBAG: ${{ env.DEBAG_MODE }}
@@ -59,3 +59,6 @@ jobs:
           DB_PASSWORD: ${{ env.PASSWORD }}
           DB_HOST: ${{ env.HOST }}
           DB_PORT: ${{ env.PORT }}
+
+      - name: деплой
+        uses:
