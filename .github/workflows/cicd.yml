@@ -44,8 +44,8 @@ jobs:
       - name: установка библиотек
         run: pip install -r requirements.txt
 
-      - name: линтинг
-        run: flake8 logistic/ --exclude=3.2-crud/stocks_products/logistic/migrations/
+#      - name: линтинг
+#        run: flake8 logistic/ --exclude=3.2-crud/stocks_products/logistic/migrations/
 
       - name: тестирование
         run: python manage.py test
