@@ -60,14 +60,16 @@ jobs:
           DB_HOST: ${{ env.HOST }}
           DB_PORT: ${{ env.PORT }}
 
-#      - name: деплой
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{ secrets.SSH_HOST }}
-#          username: ${{ secrets.SSH_USER }}
-#          password: ${{ secrets.SSH_PASSWORD }}
-#          script: |
-#            cd /django/3.2-crud/stocks_products
-#            git pull origin master
-#            source env/bin/activate
-#            pip install -r requirements.txt
+      - name: деплой
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd /django/3.2-crud/stocks_products
+            git pull origin master
+            source env/bin/activate
+            pip install -r requirements.txt
+            python manage.py migrate
+            sudo systemctl restart gunicorn
